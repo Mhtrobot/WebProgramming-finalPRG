@@ -26,3 +26,4 @@ def create_user(user: schemas.UserBase, db: Annotated[Session, Depends(get_db)])
     db.commit()
     db.refresh(db_user)
     return db_user
+
