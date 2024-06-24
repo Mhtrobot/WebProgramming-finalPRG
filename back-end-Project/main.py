@@ -66,3 +66,15 @@ async def get_current_user(db: Annotated[Session, Depends(get_db)], token: str =
     if user is None:
         raise credentials_exception
     return user
+
+@app.put('/user-update/{user_id}', response_model=schemas.UserUpdate)
+def update_user(user: schemas.UserUpdate, db: Annotated[Session, Depends(get_db)]):
+    db_user = db.query(models.USERS).filter(models.USERS.email == user.email).first()
+    if not db_user:
+        raise HTTPException(status_code= status.HTTP_404_NOT_FOUND, detail="User not found")
+    for key, value in user.dict(exclude_unset=True).items():
+        setattr(db_user, key, value)
+    db_user.password = auth.hash_password(db_user.password)
+    db.commit()
+    db.refresh(db_user)
+    return db_user

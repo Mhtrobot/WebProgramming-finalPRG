@@ -18,3 +18,7 @@ class UserCreate(UserBase):
     pass
 class TokenData(BaseModel):
     email: Optional[str] = None
+
+
+class UserUpdate(UserBase):
+    pass
