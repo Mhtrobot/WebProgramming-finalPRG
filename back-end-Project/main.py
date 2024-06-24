@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import FastAPI, Depends, HTTPException,status, Header
 from sqlalchemy.orm import Session
 
+import auth
 from database import models, schemas
 from database.database import get_db
 
@@ -20,6 +21,7 @@ def create_user(user: schemas.UserBase, db: Annotated[Session, Depends(get_db)])
 
     db_user = models.USERS(**user.dict())
     db_user.account_rank = 'newbie'
+    db_user.password = auth.hash_password(db_user.password)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
