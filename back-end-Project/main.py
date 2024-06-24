@@ -3,6 +3,7 @@ from typing import Annotated
 
 from fastapi import FastAPI, Depends, HTTPException,status, Header
 from fastapi.security import OAuth2PasswordRequestForm
+from jose import JWTError
 from sqlalchemy.orm import Session
 
 import auth
@@ -47,3 +48,21 @@ async def login_for_access_token(db: Annotated[Session, Depends(get_db)], form_d
         "user_detail": user,
         "access_token": access_token, "token_type": "bearer"
     }
+@app.get("/loged-user", response_model=schemas.UserBase)
+async def get_current_user(db: Annotated[Session, Depends(get_db)], token: str = Header(...)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Could not validate credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = auth.jwt.decode(token, auth.SECRET_KEY, algorithms=[auth.ALGORITHM])
+        email: str = payload.get("sub")
+        if email is None:
+            raise credentials_exception
+    except JWTError:
+        raise credentials_exception
+    user = db.query(models.USERS).filter(models.USERS.email == email).first()
+    if user is None:
+        raise credentials_exception
+    return user
