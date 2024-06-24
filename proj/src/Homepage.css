@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+.header {
+  height: 1200px;
+  background-color: rgb(119, 72, 204);
+
+}
+
+.logo span,
+p {
+
+  font-weight: bold;
+  font-size: 26px;
+  color: white;
+}
+
+#navmenu a {
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#navmenu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+
+  color: grey;
+}
+
+#navmenu ul li {
+  padding: 0 .5em .25em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: .3s;
+}
+
+#navmenu ul li:hover {
+  color: #fff;
+}
+
+#navmenu ul li:before {
+  content: "";
+  position: absolute;
+  inset: calc(100% - 3px) 0 0 0;
+  /* 3px = the thickness */
+  background: #ce4f20;
+  /* the color */
+  scale: 0 1;
+  transition: .3s, translate 0s .3s;
+}
+
+#navmenu ul:hover li:before {
+  scale: 1;
+}
+
+#navmenu ul li:hover:before {
+  translate: 0;
+  transition: .3s;
+}
+
+#navmenu ul:hover li:has(~ li:hover):before {
+  translate: 100% 0;
+  transition: .2s .2s, scale 0s .4s;
+}
+
+#navmenu ul:hover li:hover~li:before {
+  translate: -100% 0;
+  transition: .2s .2s, scale 0s .4s;
+}
+
+.text p {
+  color: white;
+  font-size: 65px;
+}
+
+
+
+@media only screen and (max-width:1700px) {
+  .fg {
+    margin-top: 320px;
+  }
+}
+
+@media only screen and (max-width: 991px) {
+  .fg {
+    margin-top: 10px;
+  }
+}
+
+#s1 {
+  color: white;
+  font-size: 18px;
+}
+
+#home {
+  border: 3px solid;
+  border-top-color: rgb(119, 72, 204);
+  border-left-color: rgb(119, 72, 204);
+  border-right-color: rgb(119, 72, 204);
+  border-bottom-color: orange;
+}
+
+
+
+
+.property1 p {
+  color: rgb(20, 39, 74);
+  ;
+}
+
+.property1 img {
+  box-shadow: 10px 10px 8px 10px #888888;
+}
+
+.test2 {
+  width: 500px;
+  border-radius: 10px;
+}
+
+.test1 {
+  width: 100px;
+}
+
+.test3 {
+  width: 2000px;
+}
+
+.test4 {
+  width: 500px;
+  border-radius: 10px;
+}
+
+.test6 {
+  width: 87%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins";
+  font-style: normal;
+}

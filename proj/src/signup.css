@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+}
+.kamran{
+    background-color: rgb(247, 214, 169);
+    height: 800px;
+    margin-bottom: 50px;
+    
+}
+.imag{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nvsign{
+    display: flex;
+    justify-content: end;
+}
+.information{
+    display: flex;
+    justify-content: center;
+align-items: center;
+margin-top: 50px;
+}
+.information input{
+border: none;
+display: block;
+outline: none;
+border-radius: 20px; 
+width: 380px;
+}
+
+.information button{
+    padding: 7px 150px 7px 150px;
+    border-radius: 25px;
+}
+.button-75 {
+    align-items: center;
+    background-image: linear-gradient(135deg, #f34079 40%, #fc894d);
+    border: 0;
+    border-radius: 10px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    font-family: "Codec cold",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 54px;
+    justify-content: center;
+    letter-spacing: .4px;
+    line-height: 1;
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 3px;
+    text-decoration: none;
+    text-transform: uppercase;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-75:active {
+    outline: 0;
+  }
+  
+  .button-75:hover {
+    outline: 0;
+  }
+  
+  .button-75 span {
+    transition: all 200ms;
+  }
+  
+  .button-75:hover span {
+    transform: scale(.9);
+    opacity: .75;
+  }
+  
+  @media screen and (max-width: 991px) {
+    .button-75 {
+      font-size: 15px;
+      height: 50px;
+    }
+  
+    .button-75 span {
+      line-height: 50px;
+  
+    }
+  }
+  #demo{
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  .forgot{
+    display: flex;
+    justify-content: center;
+
+  }
+  .forgot a{
+    color: black;
+    text-decoration: none;
+  }
+  .forgot span{
+    text-align: center;
+    color: black;
+  }
