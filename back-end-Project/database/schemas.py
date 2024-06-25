@@ -5,9 +5,9 @@ from datetime import date, time
 class UserBase(BaseModel):
     email: str
     password: str
-    name: Optional[str]
+    '''name: Optional[str]
     account_rank: str
-    signed_date: date
+    signed_date: date'''
 
 class UserModel(UserBase):
     user_id: int

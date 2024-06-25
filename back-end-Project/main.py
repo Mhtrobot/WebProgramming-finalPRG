@@ -1,23 +1,37 @@
-from datetime import timedelta
+from datetime import datetime, timedelta, date
 from typing import Annotated
-
 from fastapi import FastAPI, Depends, HTTPException,status, Header
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError
 from sqlalchemy.orm import Session
-
+from starlette.middleware.cors import CORSMiddleware
 import auth
 from database import models, schemas
-from database.database import get_db
+from database.database import get_db, engine
+
 
 app = FastAPI(title='TODO LIST PROJECT')
+models.Base.metadata.create_all(bind=engine)
+origins = [
+    "http://localhost",
+    "http://localhost:5173",
+    "http://localhost:3000"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 @app.get('/')
 def read_root():
     return {"Hello": "World"}
 
 @app.post('/create-user')
-def create_user(user: schemas.UserBase, db: Annotated[Session, Depends(get_db)]):
+async def create_user(user: schemas.UserBase, db: Annotated[Session, Depends(get_db)]):
     isTaken = db.query(models.USERS).filter(models.USERS.email == user.email).first()
     if isTaken:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="This user already exists")
@@ -25,6 +39,7 @@ def create_user(user: schemas.UserBase, db: Annotated[Session, Depends(get_db)])
     db_user = models.USERS(**user.dict())
     db_user.account_rank = 'newbie'
     db_user.password = auth.hash_password(db_user.password)
+    db_user.signed_date = datetime.utcnow().date()
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
