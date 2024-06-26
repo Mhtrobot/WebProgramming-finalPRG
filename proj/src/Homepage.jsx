@@ -1,13 +1,42 @@
-import React, {useState} from 'react';
+import React, { useEffect } from 'react';
 import "./Homepage.css"
-import {Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import one from "./image/_2f892213-1ca6-4b95-bff1-1ac56eb41be4.png"
 import two from "./image/_c968b9c4-3bd9-4b64-9827-dd4d4a1d53c6.png"
 import tree from "./image/12 (Community).png"
 import forr from "./image/To-do List Template _ The Conference Room (Community).png"
 
-
 function Homepage() {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        async function tokenChecker() {
+            const token = localStorage.getItem('access_token');
+            if (token) {
+                try {
+                    const response = await fetch('http://127.0.0.1:8000/loged-user', {
+                        method: 'GET', // Assuming GET is used based on the FastAPI endpoint
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'token': token
+                        }
+                    });
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        console.error('Error:', errorData.detail || 'An error occurred');
+                    } else {
+                        navigate('/userpage');
+                    }
+                } catch (error) {
+                    console.error('An error occurred:', error);
+                }
+            }
+        }
+
+        tokenChecker();
+    }, [navigate]);
+
     return (
         <>
             <div>

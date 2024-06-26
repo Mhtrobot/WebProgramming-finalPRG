@@ -63,7 +63,7 @@ async def login_for_access_token(form_data: schemas.Login, db: Annotated[Session
         "user_detail": user,
         "access_token": access_token, "token_type": "bearer"
     }
-@app.get("/loged-user", response_model=schemas.UserBase)
+@app.get("/loged-user")
 async def get_current_user(db: Annotated[Session, Depends(get_db)], token: str = Header(...)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,

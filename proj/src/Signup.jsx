@@ -41,7 +41,7 @@ const Signup = () => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }else {
-                    alert("Submit");
+                    alert("Submitted Successfully\n Now you can login to your account!");
                     navigate('/');
                 }
             } catch (error) {

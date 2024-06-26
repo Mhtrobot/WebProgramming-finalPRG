@@ -9,7 +9,10 @@ const Login = () => {
     let [input1, setInput1] = useState("")
     let [input2, setInput2] = useState("")
     const navigate = useNavigate()
-
+    const data = {
+        email: input1,
+        password: input2
+    }
     async function login(e) {
         e.preventDefault();
         let pattern = /[A-Za-z]+(.)+@(.)+[.][a-z]+/g;
@@ -28,11 +31,6 @@ const Login = () => {
             /*const fromData = new URLSearchParams();
             fromData.append('username', input1);
             fromData.append('password', input2);*/
-            const data = {
-                email: input1,
-                password: input2
-            }
-
             try {
                 const response = await fetch('http://127.0.0.1:8000/login-token', {
                     method: 'POST',
