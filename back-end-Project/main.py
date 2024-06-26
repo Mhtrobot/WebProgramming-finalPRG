@@ -46,8 +46,8 @@ async def create_user(user: schemas.UserBase, db: Annotated[Session, Depends(get
     return db_user
 
 @app.post('/login-token')
-async def login_for_access_token(db: Annotated[Session, Depends(get_db)], form_data: OAuth2PasswordRequestForm = Depends()):
-    user = db.query(models.USERS).filter(models.USERS.email == form_data.username).first()
+async def login_for_access_token(form_data: schemas.Login, db: Annotated[Session, Depends(get_db)]):
+    user = db.query(models.USERS).filter(models.USERS.email == form_data.email).first()
     if not user or not auth.verify_password(form_data.password, user.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

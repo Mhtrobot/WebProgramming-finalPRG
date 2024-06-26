@@ -1,6 +1,5 @@
 import {Component} from 'react';
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import todolist from "./image/Done.png"
 import "./signup.css"
 import React, {useState} from 'react';
@@ -9,8 +8,10 @@ import Userpage from './Userpage';
 const Login = () => {
     let [input1, setInput1] = useState("")
     let [input2, setInput2] = useState("")
+    const navigate = useNavigate()
 
-    function security(e) {
+    async function login(e) {
+        e.preventDefault();
         let pattern = /[A-Za-z]+(.)+@(.)+[.][a-z]+/g;
         let check = true;
         let check1 = true;
@@ -23,23 +24,39 @@ const Login = () => {
             check1 = false;
         }
 
-        /*fetch default */
-        let data = [{
-            email: "mobin.heydariii@gmail.com",
-            password: "13821023mobin"
-        }, {email: "mobin.heydari1398@gmail.com", password: "1020304050mobin"},
-            {email: "ali.tm@gmail.com", password: "alitm12345"}
-        ];
-
         if (check && check1) {
-            data.forEach((datas) => {
-                if (datas.email == input1 && datas.password == input2) {
+            /*const fromData = new URLSearchParams();
+            fromData.append('username', input1);
+            fromData.append('password', input2);*/
+            const data = {
+                email: input1,
+                password: input2
+            }
 
+            try {
+                const response = await fetch('http://127.0.0.1:8000/login-token', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    document.getElementById('demo').textContent = errorData.detail || 'An error occurred';
+                } else {
+                    const result = await response.json();
+                    alert('Login Successful!');
+                    localStorage.setItem('access_token', result.access_token);
+                    localStorage.setItem('user_detail', JSON.stringify(result.user_detail));
+                    navigate('/userpage');
                 }
-            });
-
+            } catch (error) {
+                console.error('An error occurred:', error);
+                document.getElementById('demo').textContent = 'An unexpected error occurred';
+            }
         }
-        e.preventDefault()
     }
 
     return (
@@ -82,27 +99,22 @@ const Login = () => {
                     <p className='text-center text-dark'> OUR REMINDER</p>
                 </div>
                 <div className="information">
-                    <form action="" onSubmit={security}>
-                        <input type="text" placeholder='Enter Your Email' onChange={(e) => setInput1(e.target.value)}
+                    <form action="" onSubmit={login}>
+                        <input type="text" placeholder='Enter Your Email' name={input1} value={input1}
+                               onChange={(e) => setInput1(e.target.value)}
                                className=' pt-2 pb-2 pr-4 pl-4'/>
                         <br/>
-                        <input type="text" placeholder='Enter Your Password' onChange={(e) => setInput2(e.target.value)}
+                        <input type="password" placeholder='Enter Your Password' name={input2} value={input2}
+                               onChange={(e) => setInput2(e.target.value)}
                                className=' pt-2 pb-2 pr-4 pl-4'/>
                         <p id='demo'></p>
                         <button type='submit' className='mt-4 button-75  '><span class="text">Login  </span></button>
-
                     </form>
                 </div>
                 <div className='forgot mt-3'><a href=""> <span>Forgot Password</span></a></div>
-
             </div>
-
-
         </>
-
-
     )
-
 }
 
 export default Login;

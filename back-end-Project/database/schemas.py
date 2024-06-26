@@ -16,6 +16,9 @@ class UserModel(UserBase):
 
 class UserCreate(UserBase):
     pass
+class Login(BaseModel):
+    email: str
+    password: str
 class TokenData(BaseModel):
     email: Optional[str] = None
 
