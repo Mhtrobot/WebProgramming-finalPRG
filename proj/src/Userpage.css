@@ -1,11 +1,14 @@
 
+.head{
+    height: 700px;
+    background-color: white;
+
+}
 .header-user{
-    height: 
-    500px;
+   
     display: flex;
     justify-content: center;
     align-items: center;
-background-color: #F0F0F0;
 }
     .text-main{
         background: -webkit-linear-gradient(#CC00FF, #5756FF,#07FDFD);
@@ -17,6 +20,7 @@ background-color: #F0F0F0;
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        margin-top: 80px;
     }
     #todolist{
         border: none;
@@ -25,6 +29,7 @@ border-top-left-radius: 10px;
 border-bottom-left-radius:10px ;
 width: 500px;
 padding: 16px 20px 16px 20px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ”«?Â »« ‘›«›?  20 œ—’œ */
 
     }
     .boxform button{
@@ -44,3 +49,25 @@ padding: 16px 20px 16px 20px;
         -webkit-text-fill-color: transparent;
         text-align: center;
     }
+    .todo{
+        list-style-type: none;
+        display: flex;
+    }
+    .todo{
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ”«?Â »« ‘›«›?  20 œ—’œ */
+
+    }
+    .todo li{
+        text-align: center;
+    }
+    .todo button{
+        border: none;
+        outline: none;
+        color: white;
+        background-color: white;
+    }
+    .icon{
+        display: flex;
+        justify-content: end;
+    }
+    
