@@ -16,3 +16,4 @@ class TODO(Base):
     user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
     todo = Column(TEXT, nullable=False)
     date = Column(DATE, nullable=False)
+    status = Column(TEXT, default='false')

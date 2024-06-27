@@ -25,3 +25,9 @@ class TokenData(BaseModel):
 
 class UserUpdate(UserBase):
     pass
+
+class AddToDo(BaseModel):
+    todo: str
+    status: str
+    class Config:
+        orm_mode = True

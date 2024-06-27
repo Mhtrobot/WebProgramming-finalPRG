@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, date
-from typing import Annotated
+from typing import Annotated, List
 from fastapi import FastAPI, Depends, HTTPException,status, Header
 from fastapi.security import OAuth2PasswordRequestForm
 from jose import JWTError
@@ -93,3 +93,18 @@ def update_user(user: schemas.UserUpdate, db: Annotated[Session, Depends(get_db)
     db.commit()
     db.refresh(db_user)
     return db_user
+
+@app.get('/list-of-todos/{user_id}')
+def get_todos(user_id: int, db: Annotated[Session, Depends(get_db)]):
+    db_todo = db.query(models.TODO).filter(models.TODO.user_id == user_id).all()
+    return db_todo
+
+@app.post('/add-todo/{user_id}')
+def add_todo(user_id: int, todo: schemas.AddToDo, db: Annotated[Session, Depends(get_db)]):
+    db_todo = models.TODO(**todo.dict())
+    db_todo.user_id = user_id
+    db_todo.date = datetime.now()
+    db.add(db_todo)
+    db.commit()
+    db.refresh(db_todo)
+    return db_todo
