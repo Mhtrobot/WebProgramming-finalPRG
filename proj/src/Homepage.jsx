@@ -26,7 +26,13 @@ function Homepage() {
                         const errorData = await response.json();
                         console.error('Error:', errorData.detail || 'An error occurred');
                     } else {
-                        navigate('/userpage');
+                        const result = await response.json();
+                        navigate('/userpage', {state:{
+                                userId: result.user_id,
+                                name: result.name,
+                                rank: result.account_rank,
+                                password: result.password
+                            }});
                     }
                 } catch (error) {
                     console.error('An error occurred:', error);
