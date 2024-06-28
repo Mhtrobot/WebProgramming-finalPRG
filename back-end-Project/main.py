@@ -111,3 +111,20 @@ def add_todo(user_id: int, todo: schemas.AddToDo, db: Annotated[Session, Depends
     db.commit()
     db.refresh(db_todo)
     return db_todo
+
+@app.put('/complete-todo/{todo_id}')
+def complete_todo(todo_id: int, db: Annotated[Session, Depends(get_db)]):
+    db_query = db.query(models.TODO).filter(models.TODO.todo_id == todo_id).first()
+    db_query.status = 'true'
+    db.commit()
+    db.refresh(db_query)
+    return db_query
+
+@app.delete('/delete-todo/{todo_id}')
+def delete_todo(todo_id: int, db: Session = Depends(get_db)):
+    db_todo = db.query(models.TODO).filter(models.TODO.todo_id == todo_id).first()
+    if not db_todo:
+        raise HTTPException(status_code=404, detail="ToDo not found")
+    db.delete(db_todo)
+    db.commit()
+    return {"detail": "ToDo deleted successfully"}

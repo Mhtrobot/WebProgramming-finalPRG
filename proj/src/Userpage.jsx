@@ -47,6 +47,32 @@ function Userpage() {
         setTitle("")
     }
 
+    async function markAsDone(todoId){
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/complete-todo/${todoId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({status: 'true'})
+            });
+            const updateTodo = await response.json();
+            setList(list.map(todo=>(todo.todo_id === todoId ? updateTodo: todo)));
+            showAlert('Task Marked As Done!', 'success');
+        }catch (e){
+            showAlert('Error Making Task as Done', 'danger');
+        }
+    }
+
+    async function deleteTodo(todoId){
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/delete-todo/${todoId}`, {method:'DELETE'});
+            setList(list.filter(todo=>todo.todo_id !== todoId));
+            showAlert('Task Deleted Successfully!', 'primary')
+        }catch (e) {
+            showAlert('Error Deleting Data!', 'alert')
+        }
+    }
     function showAlert(message, type) {
         const alertPlaceholder = document.querySelector('.todo-title');
         if (!alertPlaceholder) return;
@@ -89,12 +115,12 @@ function Userpage() {
                         <div className="list w-50 ">
                             <ul>
                                 {list.map((todo, index) => (
-                                    <div key={index} className='todo contianer-fluid mt-2 p-3'>
+                                    <div key={index} className={`todo contianer-fluid mt-2 p-3 ${todo.status === 'true' ? 'grayed-out' : ''}`}>
                                         <li className={'col-lg-7 mt-1'}>
                                             {todo.todo}
                                         </li>
-                                        <div className="icon col-lg-4">
-                                            <button className="mt-1 mr-2">
+                                        <div className={`icon col-lg-4 ${todo.status === 'true' ? 'grayed-out' : ''}`}>
+                                            <button onClick={()=> deleteTodo(todo.todo_id)} className="mt-1 mr-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25"
                                                      fill="red" className="bi bi-trash" viewBox="0 0 16 16">
                                                     <path
@@ -103,7 +129,7 @@ function Userpage() {
                                                         d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
                                                 </svg>
                                             </button>
-                                            <button className='mt-1'>
+                                            <button onClick={()=> markAsDone(todo.todo_id)} disabled={todo.status === 'true'} className='mt-1'>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                                      fill="green" className="bi bi-clipboard-check" viewBox="0 0 16 16">
                                                     <path fillRule="evenodd"

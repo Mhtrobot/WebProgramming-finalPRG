@@ -31,3 +31,7 @@ class AddToDo(BaseModel):
     status: str
     class Config:
         orm_mode = True
+
+class EditToDo(BaseModel):
+    todo: str
+    status: str
