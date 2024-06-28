@@ -14,19 +14,56 @@ function Userpage() {
         fetchToDos();
     }, []);
 
-    async function fetchToDos(){
+    async function fetchToDos() {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/list-of-todos/${userId}`, {method:'GET'});
+            const response = await fetch(`http://127.0.0.1:8000/list-of-todos/${userId}`, {method: 'GET'});
             const data = await response.json();
             setList(data)
-        }catch (error) {
-            console.error('Error Fetching data: ',error)
+        } catch (error) {
+            console.error('Error Fetching data: ', error)
         }
     }
-    function add(e) {
+
+    async function addToDo(e) {
         e.preventDefault();
-        let text = {status: false, todo: title}
-        setList([...list, text])
+        if (title.trim() === '') {
+            showAlert('Error Adding Task! Field is empty.', 'danger');
+            return;
+        }
+        try {
+            const respone = await fetch(`http://127.0.0.1:8000/add-todo/${userId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({todo: title, status: 'false'})
+            });
+            const newToDo = await respone.json();
+            setList([...list, newToDo]);
+            showAlert('new task added!', 'success')
+        } catch (e) {
+            showAlert('Error Adding Task! Field either empty or not supported', 'danger');
+        }
+        setTitle("")
+    }
+
+    function showAlert(message, type) {
+        const alertPlaceholder = document.querySelector('.todo-title');
+        if (!alertPlaceholder) return;
+
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = `
+            <div class="alert alert-${type} alert-dismissible" role="alert">
+                ${message}
+            </div>
+        `;
+        alertPlaceholder.append(wrapper);
+
+        setTimeout(() => {
+            if (alertPlaceholder.contains(wrapper)) {
+                wrapper.remove();
+            }
+        }, 3000);
     }
 
     return (
@@ -36,23 +73,22 @@ function Userpage() {
                     <div className="main-user container-fluid ">
                         <div className="text-main"><p className='text-dark'>MY TO DO LIST</p></div>
 
-                        <div className='mt-5'>
-                            <form action="" onSubmit={add}>
+                        <div className='mt-5 todo-title'>
+                            <form action="" onSubmit={addToDo}>
                                 <div className="boxform">
-
-                                    <input type="text" id='todolist' placeholder='Enter Your Todo List'
+                                    <input className={'task'} type="text" id='todolist' placeholder='Enter Your Task'
                                            onChange={(e) => setTitle(e.target.value)}/>
                                     <button type='submit'>Save</button>
                                 </div>
                             </form>
                         </div>
                         <div className="counter d-flex mt-3">
-                            <p className='mr-5'>Tope Done : {} </p>
-                            <p className='ml-5'>Todo On Progress : {} </p>
+                            <p className='mr-5'>Topic Done : {list.filter(todo => todo.status === 'true').length} </p>
+                            <p className='ml-5'>Todo On Progress : {list.filter(todo => todo.status === 'false').length} </p>
                         </div>
                         <div className="list w-50 ">
                             <ul>
-                                {list.map((todo, index)=>(
+                                {list.map((todo, index) => (
                                     <div key={index} className='todo contianer-fluid mt-2 p-3'>
                                         <li className={'col-lg-7 mt-1'}>
                                             {todo.todo}
