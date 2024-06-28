@@ -41,7 +41,7 @@ function Homepage() {
         }
 
         tokenChecker();
-    }, [navigate]);
+    }, []);
 
     return (
         <>

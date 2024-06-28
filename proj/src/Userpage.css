@@ -1,4 +1,8 @@
-
+/* Userpage.css */
+.grayed-out {
+    background-color: #d3d3d3; /* Light gray color */
+    color: #303845; /* Gray text color */
+}
 .head{
     height: 700px;
     background-color: white;
@@ -29,7 +33,7 @@ border-top-left-radius: 10px;
 border-bottom-left-radius:10px ;
 width: 500px;
 padding: 16px 20px 16px 20px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ÓÇ?å ÈÇ ÔÝÇÝ?Ê 20 ÏÑÕÏ */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ï¿½ï¿½?ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?ï¿½ 20 ï¿½ï¿½ï¿½ï¿½ */
 
     }
     .boxform button{
@@ -54,7 +58,7 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ÓÇ?å ÈÇ ÔÝÇÝ?Ê 20 ÏÑÕÏ */
         display: flex;
     }
     .todo{
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ÓÇ?å ÈÇ ÔÝÇÝ?Ê 20 ÏÑÕÏ */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ï¿½ï¿½?ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½?ï¿½ 20 ï¿½ï¿½ï¿½ï¿½ */
 
     }
     .todo li{

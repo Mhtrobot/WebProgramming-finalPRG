@@ -1,18 +1,25 @@
 import {Component, useEffect} from 'react';
-import {BrowserRouter, Route, Routes, useLocation} from 'react-router-dom';
+import {BrowserRouter, Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import React, {useState} from 'react';
 import "./Userpage.css"
 
 function Userpage() {
     const location = useLocation();
-    const {userId, name, rank, password} = location.state;
+    const navigate = useNavigate();
+    const {state} = location;
+    const {userId, name, rank, password} = state;
     let [title, setTitle] = useState("");
     let [list, setList] = useState([]);
 
     useEffect(() => {
+        if (!state || localStorage.getItem('access_token') === null || localStorage.getItem('access_token') ==="") {
+            // If state is null, navigate back to homepage or login page
+            navigate('/');
+            return;
+        }
         fetchToDos();
-    }, []);
+    }, [state, navigate]);
 
     async function fetchToDos() {
         try {
