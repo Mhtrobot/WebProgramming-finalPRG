@@ -101,9 +101,12 @@ def get_todos(user_id: int, db: Annotated[Session, Depends(get_db)]):
 
 @app.post('/add-todo/{user_id}')
 def add_todo(user_id: int, todo: schemas.AddToDo, db: Annotated[Session, Depends(get_db)]):
+    if todo.todo == '' or todo.todo == "":
+        raise HTTPException('ToDo not exist')
     db_todo = models.TODO(**todo.dict())
     db_todo.user_id = user_id
     db_todo.date = datetime.now()
+    db_todo.status = 'false'
     db.add(db_todo)
     db.commit()
     db.refresh(db_todo)
