@@ -33,7 +33,7 @@ border-top-left-radius: 10px;
 border-bottom-left-radius:10px ;
 width: 500px;
 padding: 16px 20px 16px 20px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ��?� �� ����?� 20 ���� */
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ��?� �� ����?� 20 ���� */
 
     }
     .boxform button{
@@ -58,8 +58,8 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ��?� �� ����?� 
         display: flex;
     }
     .todo{
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ��?� �� ����?� 20 ���� */
-
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* ��?� �� ����?� 20 ���� */
+        border-radius: 6px;
     }
     .todo li{
         text-align: center;
@@ -75,3 +75,14 @@ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ��?� �� ����?� 
         justify-content: end;
     }
     
+    .olaviat{
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* ��?� �� ����?� 20 ���� */
+
+        border: none;
+        border-radius: 6px;
+   width: 750px;
+    }
+
+#s33{
+text-align: center;
+}

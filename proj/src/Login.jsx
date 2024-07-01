@@ -1,8 +1,8 @@
-import {Component} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import { Component } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import todolist from "./image/Done.png"
 import "./signup.css"
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import Userpage from './Userpage';
 
 const Login = () => {
@@ -48,7 +48,7 @@ const Login = () => {
                     alert('Login Successful!');
                     localStorage.setItem('access_token', result.access_token);
                     localStorage.setItem('user_detail', JSON.stringify(result.user_detail));
-                    navigate('/userpage');
+                    navigate('/');
                 }
             } catch (error) {
                 console.error('An error occurred:', error);
@@ -63,7 +63,7 @@ const Login = () => {
                 <div className="nvbr nvsign">
                     <nav className="navbar navbar-expand-lg  me-lg-4 me-2  ">
                         <button type="button" className="navbar-toggler bg-white bg-light" data-bs-toggle="collapse"
-                                data-bs-target="#navmenu">
+                            data-bs-target="#navmenu">
                             <span className="navbar-toggler-icon "></span>
                         </button>
                         <div className="collapse navbar-collapse" id="navmenu">
@@ -88,7 +88,7 @@ const Login = () => {
 
                 <div className="box-img container-fluid ">
                     <div className="imag ">
-                        <img src={todolist} alt="" className='img-fluid'/>
+                        <img src={todolist} alt="" className='img-fluid' />
                     </div>
                 </div>
                 <div className="text-sign">
@@ -99,12 +99,12 @@ const Login = () => {
                 <div className="information">
                     <form action="" onSubmit={login}>
                         <input type="text" placeholder='Enter Your Email' name={input1} value={input1}
-                               onChange={(e) => setInput1(e.target.value)}
-                               className=' pt-2 pb-2 pr-4 pl-4'/>
-                        <br/>
+                            onChange={(e) => setInput1(e.target.value)}
+                            className=' pt-2 pb-2 pr-4 pl-4' />
+                        <br />
                         <input type="password" placeholder='Enter Your Password' name={input2} value={input2}
-                               onChange={(e) => setInput2(e.target.value)}
-                               className=' pt-2 pb-2 pr-4 pl-4'/>
+                            onChange={(e) => setInput2(e.target.value)}
+                            className=' pt-2 pb-2 pr-4 pl-4' />
                         <p id='demo'></p>
                         <button type='submit' className='mt-4 button-75  '><span class="text">Login  </span></button>
                     </form>
