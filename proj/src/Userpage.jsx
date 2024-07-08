@@ -14,7 +14,7 @@ function Userpage() {
 
     useEffect(() => {
         if (!state || localStorage.getItem('access_token') === null || localStorage.getItem('access_token') ==="") {
-            // If state is null, navigate back to homepage or login page
+            // If state is null, navigate back to homepage or login page...
             navigate('/');
             return;
         }

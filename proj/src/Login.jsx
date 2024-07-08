@@ -47,8 +47,7 @@ const Login = () => {
                     const result = await response.json();
                     alert('Login Successful!');
                     localStorage.setItem('access_token', result.access_token);
-                    localStorage.setItem('user_detail', JSON.stringify(result.user_detail));
-                    navigate('/userpage');
+                    navigate('/');
                 }
             } catch (error) {
                 console.error('An error occurred:', error);
