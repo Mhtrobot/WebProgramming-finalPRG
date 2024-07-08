@@ -29,6 +29,7 @@ class UserUpdate(UserBase):
 class AddToDo(BaseModel):
     todo: str
     status: str
+    priority: int
     class Config:
         orm_mode = True
 

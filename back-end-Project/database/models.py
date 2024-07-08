@@ -17,3 +17,4 @@ class TODO(Base):
     todo = Column(TEXT, nullable=False)
     date = Column(DATE, nullable=False)
     status = Column(TEXT, default='false')
+    priority = Column(Integer, default=0)
