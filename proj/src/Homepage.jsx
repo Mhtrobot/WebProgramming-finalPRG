@@ -5,6 +5,7 @@ import one from "./image/_2f892213-1ca6-4b95-bff1-1ac56eb41be4.png"
 import two from "./image/_c968b9c4-3bd9-4b64-9827-dd4d4a1d53c6.png"
 import tree from "./image/12 (Community).png"
 import forr from "./image/To-do List Template _ The Conference Room (Community).png"
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 
 function Homepage() {
     const navigate = useNavigate();
@@ -53,25 +54,19 @@ function Homepage() {
                             <span>Planning</span>
                         </div>
                         <div className="nvbr">
-                            <nav className="navbar navbar-expand-lg mt-4 me-lg-4 me-2 ">
-                                <button type="button" className="navbar-toggler bg-white bg-light"
-                                        data-bs-toggle="collapse" data-bs-target="#navmenu">
-                                    <span className="navbar-toggler-icon "></span>
-                                </button>
-                                <div className="collapse navbar-collapse" id="navmenu">
-                                    <ul className="navbar-nav ms-auto">
-                                        <li className="nav-item">
-                                            <Link to={"/"} className='nav-link'>Home</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link to={"/login"} className='nav-link'>Login</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <Link to={"/signup"} className='nav-link'>Sign Up</Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </nav>
+                        <Navbar  expand="lg">
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto" id='navmenu'>
+              <Nav.Link as={Link} to="/" className='navlink' >Home</Nav.Link>
+              <Nav.Link as={Link} to="/signup"  className='navlink'>Sign Up</Nav.Link>
+              <Nav.Link   as={Link} to="/login"  className='navlink'>Login</Nav.Link>
+             
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
                         </div>
                     </div>
 

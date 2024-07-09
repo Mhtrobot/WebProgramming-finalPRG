@@ -3,6 +3,7 @@ import {Link,useNavigate} from 'react-router-dom';
 import todolist from "./image/Done.png"
 import "./signup.css"
 import React, {useState} from 'react';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 
 const Signup = () => {
     let [input1, setInput1] = useState("")
@@ -52,31 +53,21 @@ const Signup = () => {
 
     return (
         <>
-            <div className='kamran'>
+            <div className='org'>
                 <div className="nvbr nvsign">
-                    <nav className="navbar navbar-expand-lg  me-lg-4 me-2  ">
-                        <button type="button" className="navbar-toggler bg-white bg-light" data-bs-toggle="collapse"
-                                data-bs-target="#navmenu">
-                            <span className="navbar-toggler-icon "></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navmenu">
-                            <ul className="navbar-nav ms-auto">
-                                <li className="nav-item ">
-                                    <Link to={"/"} className='nav-link text-dark'>Home</Link>
-                                </li>
-
-                                <li className="nav-item">
-                                    <Link to={"/login"} className='nav-link text-dark'>Login</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={"/signup"} className='nav-link text-dark'>Sign Up</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to={"/managment"} className='nav-link text-dark'>Managment</Link>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
+                <Navbar  expand="lg">
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto" id='navmenu'>
+              <Nav.Link as={Link} to="/" className='navlink' style={{color:"black"}} >Home</Nav.Link>
+              <Nav.Link as={Link} to="/signup"  className='navlink' style={{color:"black"}}>Sign Up</Nav.Link>
+              <Nav.Link   as={Link} to="/login"  className='navlink' style={{color:"black"}}>Login</Nav.Link>
+             
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
                 </div>
 
                 <div className="box-img container-fluid ">

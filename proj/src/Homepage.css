@@ -20,56 +20,8 @@ p {
   font-weight: 600;
   font-size: 20px;
 }
-
-#navmenu ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-
-  color: grey;
-}
-
-#navmenu ul li {
-  padding: 0 .5em .25em;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: .3s;
-}
-
-#navmenu ul li:hover {
-  color: #fff;
-}
-
-#navmenu ul li:before {
-  content: "";
-  position: absolute;
-  inset: calc(100% - 3px) 0 0 0;
-  /* 3px = the thickness */
-  background: #ce4f20;
-  /* the color */
-  scale: 0 1;
-  transition: .3s, translate 0s .3s;
-}
-
-#navmenu ul:hover li:before {
-  scale: 1;
-}
-
-#navmenu ul li:hover:before {
-  translate: 0;
-  transition: .3s;
-}
-
-#navmenu ul:hover li:has(~ li:hover):before {
-  translate: 100% 0;
-  transition: .2s .2s, scale 0s .4s;
-}
-
-#navmenu ul:hover li:hover~li:before {
-  translate: -100% 0;
-  transition: .2s .2s, scale 0s .4s;
+#navmenu a:hover {
+  border-bottom: 3px solid orange;
 }
 
 .text p {
