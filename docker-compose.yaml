@@ -1,0 +1,18 @@
+version: "1.0"
+
+services:
+  backend-python:
+    build: ./back-end-Project
+    container_name: backend_fastapi_c
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./back-end-Project:/app
+      - ./app/.venv
+  react-front:
+    build: ./proj
+    container_name: react_todo_c
+    ports:
+      - '3000:3000'
+    stdin_open: true
+    tty: true
